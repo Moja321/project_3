@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const morgan = require("morgan");
+const session = require("express-session");
 
 require("dotenv").config();
 const app = express();
@@ -9,6 +10,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+
+app.use(
+  session({
+    secret: "learnorigamiinsimplesteps",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 const PORT = process.env.PORT || 3000;
 mongoURI = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}/${process.env.MONGO_DBNAME}`;
@@ -24,17 +33,17 @@ mongoose.connection.on("disconnected", () => {
   console.log("Successfully disconnected");
 });
 
-// app.get("/", (req, res) => {
-//   res.send("Hello Everyone");
-// });
-
 const origamiController = require("./controllers/origami_controller.js");
-// const signupController = require("./controllers/signup_controller.js");
-// const loginController = require("./controllers/login_controller.js");
+const signupController = require("./controllers/signup_controller.js");
+const loginController = require("./controllers/login_controller.js");
 
 app.use("/origami", origamiController);
-// app.use("/signup", signupController);
-// app.use("/login", loginController);
+app.use("/signup", signupController);
+app.use("/login", loginController);
+
+app.get("/", (req, res) => {
+  res.redirect("/origami");
+});
 
 app.listen(PORT, () => {
   console.log("application running on port: " + PORT);
