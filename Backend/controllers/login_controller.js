@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const login = require("../models/signup_schema.js");
 
 router.post("/", (req, res) => {
-  login.findOne({ username: req.body.username }, (error, foundUser) => {
+  login.findOne({ username: req.body.username }, (err, foundUser) => {
     if (err) {
       console.log(err);
     } else {

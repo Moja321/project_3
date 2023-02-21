@@ -14,7 +14,7 @@ router.post("/", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      console.log("Successfully created user " + createdUser.username);
+      console.log("Successfully Created User: " + createdUser.username);
       req.session.user = createdUser;
       res.redirect("/origami");
     }
