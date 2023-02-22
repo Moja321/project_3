@@ -12,7 +12,8 @@ router.post("/", (req, res) => {
       if (foundUser) {
         if (bcrypt.compareSync(req.body.password, foundUser.password)) {
           req.session.user = foundUser;
-          res.redirect("/origami");
+          // res.redirect("/origami");
+          res.send(foundUser);
         } else {
           res.send("Invalid Username or Password");
         }
