@@ -12,9 +12,11 @@ router.post("/", (req, res) => {
       if (foundUser) {
         if (bcrypt.compareSync(req.body.password, foundUser.password)) {
           req.session.user = foundUser;
-          res.redirect("/origami");
+          console.log(foundUser);
+          res.send(foundUser);
+          //res.redirect("/origami");
         } else {
-          res.send("Invalid Username or Password");
+          res.send("FAIL"); //check status on react
         }
       }
     }
@@ -23,7 +25,7 @@ router.post("/", (req, res) => {
 
 router.get("/logout", (req, res) => {
   req.session.destroy(() => {
-    res.redirect("/origami");
+    //res.redirect("/origami");
   });
 });
 
