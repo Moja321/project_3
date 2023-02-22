@@ -12,6 +12,7 @@ router.post("/", (req, res) => {
       if (foundUser) {
         if (bcrypt.compareSync(req.body.password, foundUser.password)) {
           req.session.user = foundUser;
+
           console.log(foundUser);
           res.send(foundUser);
           //res.redirect("/origami");

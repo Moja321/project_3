@@ -4,7 +4,7 @@ const origamiSchema = new mongoose.Schema({
   posterid: { type: String },
   name: { type: String },
   likes: { type: Number },
-  title: { type: String, required: true },
+  title: { type: String },
   img: { type: String },
   description: { type: String },
   reference: { type: String },
