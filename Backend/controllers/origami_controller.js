@@ -1,11 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
 
 const origami = require("../models/origami_schema.js");
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
 
 router.get("/", async (req, res) => {
   try {
@@ -15,7 +11,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", upload.single("myImage"), async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     res.json(await origami.create(req.body));
   } catch (error) {
